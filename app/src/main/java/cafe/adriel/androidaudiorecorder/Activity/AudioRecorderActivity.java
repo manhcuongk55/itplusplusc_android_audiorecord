@@ -214,6 +214,7 @@ public class AudioRecorderActivity extends AppCompatActivity
         stopRecording();
         setResult(RESULT_OK);
         finish();
+
     }
 
     public void toggleRecording(View v) {
