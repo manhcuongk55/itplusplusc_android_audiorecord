@@ -28,4 +28,8 @@ public interface ApiInterface {
     @Multipart
     @POST("api/saveAudio")
     Call<Respose> saveAudio(@Part MultipartBody.Part file , @Query("id") String id, @Header("Authorization") String token);
+    @FormUrlEncoded
+    @POST("api/register")
+    Call<Respose> register(@Field("userName") String userName, @Field("fullName") String fullName,@Field("passWord") String passWord, @Field("timeRecorder") String timeRecorder,@Field("email") String email, @Field("phone") String phone);
+
 }

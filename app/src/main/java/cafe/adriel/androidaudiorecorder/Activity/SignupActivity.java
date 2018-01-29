@@ -13,6 +13,15 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cafe.adriel.androidaudiorecorder.common.Const;
+import cafe.adriel.androidaudiorecorder.model.AudioResponse;
+import cafe.adriel.androidaudiorecorder.model.Respose;
+import cafe.adriel.androidaudiorecorder.rest.ApiClient;
+import cafe.adriel.androidaudiorecorder.rest.ApiInterface;
+import cafe.adriel.androidaudiorecorder.storage.StorageManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SignupActivity extends AppCompatActivity {
@@ -34,7 +43,7 @@ public class SignupActivity extends AppCompatActivity {
     Button _signupButton;
     @BindView(R.id.link_login)
     TextView _loginLink;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Finish the registration screen and return to the Login activity
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -85,6 +94,24 @@ public class SignupActivity extends AppCompatActivity {
 
         // TODO: Implement your own signup logic here.
 
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        Call<Respose> call = apiService.register(name, address, password, "30", email, mobile);
+        call.enqueue(new Callback<Respose>() {
+            @Override
+            public void onResponse(Call<Respose> call,
+                                   Response<Respose> response) {
+              //  int statusCode = response.code();
+                String mesa = response.message();
+                Toast.makeText(getApplicationContext(), "result :" + mesa, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Respose> call, Throwable t) {
+                Log.e("Upload error:", t.getMessage());
+            }
+        });
+
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -95,6 +122,8 @@ public class SignupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
+
     }
 
 
@@ -142,7 +171,7 @@ public class SignupActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (mobile.isEmpty() || mobile.length()!=10) {
+        if (mobile.isEmpty()) {
             _mobileText.setError("Enter Valid Mobile Number");
             valid = false;
         } else {
