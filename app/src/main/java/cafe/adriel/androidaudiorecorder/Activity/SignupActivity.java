@@ -11,11 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cafe.adriel.androidaudiorecorder.common.Const;
 import cafe.adriel.androidaudiorecorder.model.AudioResponse;
 import cafe.adriel.androidaudiorecorder.model.Respose;
+import cafe.adriel.androidaudiorecorder.model.User;
 import cafe.adriel.androidaudiorecorder.rest.ApiClient;
 import cafe.adriel.androidaudiorecorder.rest.ApiInterface;
 import cafe.adriel.androidaudiorecorder.storage.StorageManager;
@@ -94,21 +97,37 @@ public class SignupActivity extends AppCompatActivity {
 
         // TODO: Implement your own signup logic here.
 
-        ApiInterface apiService =
+
+        ApiInterface apiService2 =
                 ApiClient.getClient().create(ApiInterface.class);
-        Call<Respose> call = apiService.register(name, address, password, "30", email, mobile);
-        call.enqueue(new Callback<Respose>() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userName", name);
+        map.put("fullName", address);
+        map.put("passWord", password);
+        map.put("timeRecorder", "30");
+        map.put("email", email);
+        map.put("phone", mobile);
+
+        Call<Respose> call2 = apiService2.register(map);
+
+        call2.enqueue(new Callback<Respose>() {
             @Override
-            public void onResponse(Call<Respose> call,
-                                   Response<Respose> response) {
-              //  int statusCode = response.code();
-                String mesa = response.message();
-                Toast.makeText(getApplicationContext(), "result :" + mesa, Toast.LENGTH_LONG).show();
+            public void onResponse(Call<Respose> call, Response<Respose> response1) {
+                int statusCode = response1.code();
+
+                if (statusCode == 200) {
+                    String mesa = response1.body().getMessange();
+                    Toast.makeText(getApplicationContext(), "result :" + mesa, Toast.LENGTH_LONG).show();
+                    Log.e(TAG, statusCode + "");
+                } else {
+                    Toast.makeText(getApplicationContext(), "error :" + statusCode, Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Respose> call, Throwable t) {
-                Log.e("Upload error:", t.getMessage());
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
             }
         });
 
@@ -130,7 +149,11 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        //  finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
         finish();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     public void onSignupFailed() {
