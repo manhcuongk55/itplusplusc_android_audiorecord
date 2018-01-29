@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tvSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/menuControl"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="60dp"
+        android:padding="30dp"
+        android:gravity="center"
+        android:text="Chúng ta từng nhìn lên bầu trời và nghĩ về vị trí của chúng ta giữa những chòm sao. Giờ đây, chúng ta chỉ còn biết cúi xuống và lo lắng về vị trí của mình giữa mênh mông cát bụi"
+        android:textColor="#FFFF00"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:id="@+id/timerId"
+        android:layout_above="@+id/menuControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-light"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-thin"
+            android:text="00:00:00"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/menuControl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/aar_footer_height"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/restart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/record"
+            android:layout_toLeftOf="@+id/record"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_restart"
+            android:onClick="restartRecording"
+            android:visibility="invisible"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <ImageButton
+            android:id="@+id/record"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_rec"
+            android:onClick="toggleRecording"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/record"
+            android:layout_toRightOf="@+id/record"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_play"
+            android:onClick="togglePost"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
