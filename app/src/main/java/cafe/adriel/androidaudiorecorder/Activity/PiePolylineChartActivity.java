@@ -42,8 +42,10 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -214,6 +216,9 @@ public class PiePolylineChartActivity extends DemoBase implements OnSeekBarChang
 //        map.put("endDate", "1516406400999");
 //        map.put("type", "1");
         Timestamp timestamp = new Timestamp(c.getTimeInMillis());
+
+
+
         getData(timestamp.getTime() + "", timestamp.getTime() + "", 1);
 
     }
@@ -379,7 +384,7 @@ public class PiePolylineChartActivity extends DemoBase implements OnSeekBarChang
 
                 if (statusCode == 200) {
                     String mesa = response1.body().getMessange();
-                    Toast.makeText(getApplicationContext(), "result :" + mesa, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "result :" + mesa, Toast.LENGTH_LONG).show();
                     Log.e(TAG, statusCode + "");
 
                     days = response1.body().getData();
@@ -491,6 +496,19 @@ public class PiePolylineChartActivity extends DemoBase implements OnSeekBarChang
                     mMonth = monthOfYear;
                     mDay = dayOfMonth;
 
+                    Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+
+                    Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
+
+                    mChart.invalidate();
+                    mChart2.invalidate();
+                    mChart3.invalidate();
+
+                    mChart.clear();
+                    mChart2.clear();
+                    mChart3.clear();
+
+                    getData(timestamp.getTime() + "", timestamp.getTime() + "", 1);
                     updateDisplay();
                 }
             };
