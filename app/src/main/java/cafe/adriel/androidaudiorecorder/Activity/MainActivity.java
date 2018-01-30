@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cafe.adriel.androidaudiorecorder.common.AndroidAudioRecorder;
@@ -99,10 +101,16 @@ public class MainActivity extends AppCompatActivity {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<User> call = apiService.getTokenAuthen("dmcksclc5@gmail.com","123456");
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("email", "dmcksclc5@gmail.com");
+        map.put("password","123456");
+        Call<User> call = apiService.getTokenAuthen(map);
+
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+
                 int statusCode = response.code();
                 if(statusCode == 200){
                     if(response.body().getToken() != null){
@@ -120,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
+
                 onLoginFailed(t.toString());
             }
         });
@@ -209,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"error :"+ statusCode, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"error getContent :"+ statusCode, Toast.LENGTH_LONG).show();
                 }
             }
 
