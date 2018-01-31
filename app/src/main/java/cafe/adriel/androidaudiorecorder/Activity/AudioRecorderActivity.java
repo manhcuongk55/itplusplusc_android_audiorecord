@@ -143,6 +143,7 @@ public class AudioRecorderActivity extends AppCompatActivity
             toggleRecording(null);
         }
     }
+
     // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,6 +151,7 @@ public class AudioRecorderActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.aar_audio_recorder, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -162,6 +164,7 @@ public class AudioRecorderActivity extends AppCompatActivity
         }
         return true;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -258,10 +261,10 @@ public class AudioRecorderActivity extends AppCompatActivity
                         public void onResponse(Call<AudioResponse> call, Response<AudioResponse> response) {
                             int statusCode = response.code();
                             if (statusCode == 200) {
-                                if(response.body().getAudio() != null){
+                                if (response.body().getAudio() != null) {
                                     StorageManager.setStringValue(getApplicationContext(), Const.ID_AUDIO, response.body().getAudio().getId() + "");
                                     tvSub.setText(response.body().getAudio().getContent());
-                                }else{
+                                } else {
                                     tvSub.setText("Server error");
                                 }
                             } else {
@@ -328,6 +331,10 @@ public class AudioRecorderActivity extends AppCompatActivity
                         new File(filePath));
             }
             recorder.resumeRecording();
+
+            if (visualizerView != null) {
+                visualizerView.onResume();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -348,6 +355,10 @@ public class AudioRecorderActivity extends AppCompatActivity
             visualizerHandler.stop();
         }
 
+        if (visualizerView != null) {
+            visualizerView.onPause();
+        }
+
         if (recorder != null) {
             recorder.pauseRecording();
         }
@@ -359,6 +370,10 @@ public class AudioRecorderActivity extends AppCompatActivity
         visualizerView.release();
         if (visualizerHandler != null) {
             visualizerHandler.stop();
+        }
+
+        if (visualizerView != null) {
+            visualizerView.onPause();
         }
 
         recorderSecondsElapsed = 0;
