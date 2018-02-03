@@ -4,4 +4,7 @@
     <string name="aar_paused">Paused</string>
     <string name="aar_recording">Recording</string>
     <string name="aar_playing">Playing</string>
+
+    <string name="Success">Success</string>
+    <string name="Loading">Please Recording !</string>
 </resources>
