@@ -104,10 +104,10 @@ public class AudioRecorderActivity extends AppCompatActivity
         }
         visualizerView = new GLAudioVisualizationView.Builder(this)
                 .setLayersCount(1)
-                .setWavesCount(6)
+                .setWavesCount(3)
                 .setWavesHeight(R.dimen.aar_wave_height)
                 .setWavesFooterHeight(R.dimen.aar_footer_height)
-                .setBubblesPerLayer(20)
+                .setBubblesPerLayer(30)
                 .setBubblesSize(R.dimen.aar_bubble_size)
                 .setBubblesRandomizeSize(true)
                 .setBackgroundColor(Util.getDarkerColor(color))
@@ -411,6 +411,20 @@ public class AudioRecorderActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void togglePlaying(View v){
+        pauseRecording();
+        Util.wait(100, new Runnable() {
+            @Override
+            public void run() {
+                if(isPlaying()){
+                    stopPlaying();
+                } else {
+                    startPlaying();
+                }
+            }
+        });
     }
 
     private void stopPlaying() {

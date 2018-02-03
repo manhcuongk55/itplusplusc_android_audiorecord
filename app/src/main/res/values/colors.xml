@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#44B6AE</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="recorder_bg">#F4511E</color>
+    <color name="recorder_bg">#fafafa</color>
     <color name="primary">#44B6AE</color>
     <color name="primary_dark">#44B6AE</color>
     <color name="primary_darker">#CC1D1D</color>

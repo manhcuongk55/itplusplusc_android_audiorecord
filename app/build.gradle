@@ -30,6 +30,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.kailashdabhi:om-recorder:1.1.0'
     compile 'com.cleveroad:audiovisualization:1.0.0'
+    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
 }

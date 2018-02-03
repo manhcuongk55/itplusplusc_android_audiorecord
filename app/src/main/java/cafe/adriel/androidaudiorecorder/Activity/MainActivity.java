@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("email", "dmcksclck55@gamil.com");
+        map.put("email", "phamduybk@gmail.com");
         map.put("password","123456");
         Call<User> call = apiService.getTokenAuthen(map);
 
