@@ -10,7 +10,6 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -67,7 +66,7 @@
             android:layout_alignParentBottom="true">
 
             <ImageButton
-                android:id="@+id/restart"
+                android:id="@+id/play"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -75,11 +74,10 @@
                 android:layout_marginTop="50dp"
                 android:layout_toLeftOf="@+id/record"
                 android:layout_toStartOf="@+id/record"
-                android:onClick="restartRecording"
+                android:onClick="togglePlaying"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/aar_ic_restart"
-                android:visibility="invisible" />
+                android:src="@drawable/aar_ic_play" />
 
             <ImageButton
                 android:id="@+id/record"
@@ -95,7 +93,7 @@
                 android:src="@drawable/aar_ic_rec" />
 
             <ImageButton
-                android:id="@+id/play"
+                android:id="@+id/restart"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -103,31 +101,14 @@
                 android:layout_marginTop="50dp"
                 android:layout_toEndOf="@+id/record"
                 android:layout_toRightOf="@+id/record"
-                android:onClick="togglePlaying"
+                android:onClick="togglePost"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/aar_ic_play" />
+                android:src="@drawable/smartphone" />
 
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <com.dd.processbutton.iml.ActionProcessButton
-        android:id="@+id/btnSignIn"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="2dp"
-        android:onClick="togglePost"
-        android:text="Send Data"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        custom:pb_colorComplete="@color/green_complete"
-        custom:pb_colorNormal="@color/blue_normal"
-        custom:pb_colorPressed="@color/blue_pressed"
-        custom:pb_colorProgress="@color/purple_progress"
-        custom:pb_textComplete="@string/Success"
-        custom:pb_textProgress="@string/Loading" />
 
 </FrameLayout>
 

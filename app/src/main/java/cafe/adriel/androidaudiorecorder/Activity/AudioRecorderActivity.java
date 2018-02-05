@@ -50,13 +50,13 @@ import retrofit2.Response;
 public class AudioRecorderActivity extends AppCompatActivity
         implements PullTransport.OnAudioChunkPulledListener, MediaPlayer.OnCompletionListener {
     private static final String AUDIO_FILE_PATH =
-            Environment.getExternalStorageDirectory().getPath()+ "/recorded_audio.wav";
+            Environment.getExternalStorageDirectory().getPath() + "/recorded_audio.wav";
 
-    private static final String AUDIO_FILE=
+    private static final String AUDIO_FILE =
             Environment.getExternalStorageDirectory().getPath();
 
     //    private static final String AUDIO_FILE_PATH =
-     //       Environment.getExternalStorageDirectory().getPath() + "/recorded_audio.wav";
+    //       Environment.getExternalStorageDirectory().getPath() + "/recorded_audio.wav";
     private static final String TAG = AudioRecorderActivity.class.getName();
     private String filePath;
     private AudioSource source;
@@ -83,7 +83,6 @@ public class AudioRecorderActivity extends AppCompatActivity
     private ImageButton recordView;
     private ImageButton playView;
     private TextView tvSub;
-    private ActionProcessButton btnSignIn;
     private String name;
 
     @Override
@@ -119,11 +118,11 @@ public class AudioRecorderActivity extends AppCompatActivity
                 .setBubblesPerLayer(30)
                 .setBubblesSize(R.dimen.aar_bubble_size)
                 .setBubblesRandomizeSize(true)
-                .setBackgroundColor(Util.getDarkerColor(color))
+                // .setBackgroundColor(Util.getDarkerColor(color))
+                .setBackgroundColor(getResources().getColor(R.color.pink))
                 .setLayerColors(new int[]{color})
                 .build();
 
-        btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
 
         contentLayout = (RelativeLayout) findViewById(R.id.content);
         statusView = (TextView) findViewById(R.id.status);
@@ -254,8 +253,8 @@ public class AudioRecorderActivity extends AppCompatActivity
         File file = new File(AUDIO_FILE_PATH);
 
 
-        File toSend = new File(AUDIO_FILE+"/"+getNameFile());
-        if(file.exists())
+        File toSend = new File(AUDIO_FILE + "/" + getNameFile());
+        if (file.exists())
             file.renameTo(toSend);
         // create RequestBody instance from file
 
@@ -289,7 +288,6 @@ public class AudioRecorderActivity extends AppCompatActivity
                                     tvSub.setText(response.body().getAudio().getContent());
                                     restartRecording();
                                     stopRecording();
-                                    btnSignIn.setMode(ActionProcessButton.Mode.PROGRESS);
                                 } else {
                                     tvSub.setText("Server error");
                                 }
@@ -316,12 +314,12 @@ public class AudioRecorderActivity extends AppCompatActivity
         });
     }
 
-    public void renameFile(String oldName,String newName){
+    public void renameFile(String oldName, String newName) {
         File dir = Environment.getExternalStorageDirectory();
-        if(dir.exists()){
-            File from = new File(dir,oldName);
-            File to = new File(dir,newName);
-            if(from.exists())
+        if (dir.exists()) {
+            File from = new File(dir, oldName);
+            File to = new File(dir, newName);
+            if (from.exists())
                 from.renameTo(to);
         }
     }
@@ -329,8 +327,8 @@ public class AudioRecorderActivity extends AppCompatActivity
     private String getNameFile() {
         String name_consumer = StorageManager.getStringValue(getApplicationContext(), Const.NAME_CONSUMER, "");
         name = StorageManager.getStringValue(getApplicationContext(), Const.ID_AUDIO);
-        String result = name + "_" + name_consumer.replace(".","_") + ".wav";
-       // Toast.makeText(getApplicationContext(), "send file :" + result, Toast.LENGTH_LONG).show();
+        String result = name + "_" + name_consumer.replace(".", "_") + ".wav";
+        // Toast.makeText(getApplicationContext(), "send file :" + result, Toast.LENGTH_LONG).show();
         return result;
     }
 
@@ -379,6 +377,9 @@ public class AudioRecorderActivity extends AppCompatActivity
     }
 
     private void resumeRecording() {
+
+        restartRecording();
+
         isRecording = true;
         statusView.setText(R.string.aar_recording);
         statusView.setVisibility(View.VISIBLE);
@@ -390,12 +391,12 @@ public class AudioRecorderActivity extends AppCompatActivity
         visualizerHandler = new VisualizerHandler();
         visualizerView.linkTo(visualizerHandler);
         try {
-            if (recorder == null) {
-                timerView.setText("00:00:00");
-                recorder = OmRecorder.wav(
-                        new PullTransport.Default(Util.getMic(source, channel, sampleRate), AudioRecorderActivity.this),
-                        new File(filePath));
-            }
+            // if (recorder == null) {
+            timerView.setText("00:00:00");
+            recorder = OmRecorder.wav(
+                    new PullTransport.Default(Util.getMic(source, channel, sampleRate), AudioRecorderActivity.this),
+                    new File(filePath));
+            //  }
             recorder.resumeRecording();
 
             if (visualizerView != null) {
@@ -432,7 +433,6 @@ public class AudioRecorderActivity extends AppCompatActivity
 
         stopTimer();
 
-        btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
     }
 
     private void stopRecording() {
