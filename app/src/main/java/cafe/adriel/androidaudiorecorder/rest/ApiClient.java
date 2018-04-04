@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://203.113.152.90:8088/voice_test/public/";
+    public static final String BASE_URL = "https://203.113.152.90:8088/voice_test/public/";
     public static final String SUFFIX_URL_AUTHEN = "auth";
     public static final String SUFFIX_URL_GETCONTENT = "getContent";
     public static final String SUFFIX_URL_SAVE_AUDIO = "saveAudio";
