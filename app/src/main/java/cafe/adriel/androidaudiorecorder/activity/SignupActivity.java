@@ -1,4 +1,4 @@
-package cafe.adriel.androidaudiorecorder.Activity;
+package cafe.adriel.androidaudiorecorder.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,19 +15,15 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cafe.adriel.androidaudiorecorder.common.Const;
-import cafe.adriel.androidaudiorecorder.model.AudioResponse;
 import cafe.adriel.androidaudiorecorder.model.Respose;
-import cafe.adriel.androidaudiorecorder.model.User;
 import cafe.adriel.androidaudiorecorder.rest.ApiClient;
 import cafe.adriel.androidaudiorecorder.rest.ApiInterface;
-import cafe.adriel.androidaudiorecorder.storage.StorageManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity  {
     private static final String TAG = "SignupActivity";
 
     @BindView(R.id.input_name)
@@ -99,7 +95,12 @@ public class SignupActivity extends AppCompatActivity {
 
 
         ApiInterface apiService2 =
-                ApiClient.getClient().create(ApiInterface.class);
+                null;
+        try {
+            apiService2 = ApiClient.getClient(this).create(ApiInterface.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         HashMap<String, String> map = new HashMap<>();
         map.put("userName", name);
         map.put("fullName", address);

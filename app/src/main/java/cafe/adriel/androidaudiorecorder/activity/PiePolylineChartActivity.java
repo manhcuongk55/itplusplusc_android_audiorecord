@@ -1,14 +1,12 @@
 
-package cafe.adriel.androidaudiorecorder.Activity;
+package cafe.adriel.androidaudiorecorder.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
@@ -42,7 +40,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -363,7 +360,12 @@ public class PiePolylineChartActivity extends DemoBase implements OnSeekBarChang
 
     private void getData(String startDate, String endDate, int type) {
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                null;
+        try {
+            apiService = ApiClient.getClient(this).create(ApiInterface.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         HashMap<String, String> map = new HashMap<>();
 //        map.put("startDate", "1516406400000");
 //        map.put("endDate", "1516406400999");

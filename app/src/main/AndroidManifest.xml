@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cafe.adriel.androidaudiorecorder.Activity">
+    package="cafe.adriel.androidaudiorecorder.activity">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -13,16 +13,16 @@
         android:theme="@style/AppTheme.Dark"
         android:icon="@drawable/logo"
         android:allowBackup="true">
-        <activity android:name="cafe.adriel.androidaudiorecorder.Activity.MainActivity">
+        <activity android:name="cafe.adriel.androidaudiorecorder.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cafe.adriel.androidaudiorecorder.Activity.SignupActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="cafe.adriel.androidaudiorecorder.Activity.PiePolylineChartActivity" android:theme="@style/AppTheme" />
+        <activity android:name="cafe.adriel.androidaudiorecorder.activity.SignupActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="cafe.adriel.androidaudiorecorder.activity.PiePolylineChartActivity" android:theme="@style/AppTheme" />
         <activity
-            android:name="cafe.adriel.androidaudiorecorder.Activity.AudioRecorderActivity"
+            android:name="cafe.adriel.androidaudiorecorder.activity.AudioRecorderActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
     </application>

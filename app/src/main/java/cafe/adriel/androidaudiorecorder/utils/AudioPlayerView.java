@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-import cafe.adriel.androidaudiorecorder.Activity.R;
+import cafe.adriel.androidaudiorecorder.activity.R;
 
 public class AudioPlayerView extends LinearLayout implements View.OnClickListener, MediaPlayer.OnPreparedListener, SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener {
     private static final String TAG = "AudioPlayerView";

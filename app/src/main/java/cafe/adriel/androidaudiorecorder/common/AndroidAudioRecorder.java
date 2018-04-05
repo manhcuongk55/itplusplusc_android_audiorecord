@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 
-import cafe.adriel.androidaudiorecorder.Activity.AudioRecorderActivity;
+import cafe.adriel.androidaudiorecorder.activity.AudioRecorderActivity;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import cafe.adriel.androidaudiorecorder.model.AudioSource;

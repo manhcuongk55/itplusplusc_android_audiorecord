@@ -1,4 +1,4 @@
-package cafe.adriel.androidaudiorecorder.Activity;
+package cafe.adriel.androidaudiorecorder.activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -93,18 +93,26 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        //String email = _emailText.getText().toString();
-        //String password = _passwordText.getText().toString();
+        String email = _emailText.getText().toString();
+        String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
 
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                null;
+        try {
+            apiService = ApiClient.getClient(this).create(ApiInterface.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("email", "voice@cyberspace.vn");
-        map.put("password","123456aA@");
+        map.put("email", "cuongdm29@gmail");
+        map.put("password","123456Aa@");
+
+       /* map.put("email", email);
+        map.put("password",password);*/
 
         StorageManager.setStringValue(getApplicationContext(),Const.NAME_CONSUMER,"phamduybk@gmail.com");
         Call<User> call = apiService.getTokenAuthen(map);
@@ -191,7 +199,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void recordAudio(){
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                null;
+        try {
+            apiService = ApiClient.getClient(this).create(ApiInterface.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String token = "Bearer " + StorageManager.getStringValue(getApplicationContext(),Const.TOKEN,"");
         Call<AudioResponse> call = apiService.getContent(0+"", token);
         final AndroidAudioRecorder builder = new AndroidAudioRecorder(this);

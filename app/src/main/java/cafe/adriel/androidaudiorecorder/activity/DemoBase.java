@@ -1,5 +1,5 @@
 
-package cafe.adriel.androidaudiorecorder.Activity;
+package cafe.adriel.androidaudiorecorder.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;

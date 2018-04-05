@@ -1,4 +1,4 @@
-package cafe.adriel.androidaudiorecorder.Activity;
+package cafe.adriel.androidaudiorecorder.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.DbmHandler;
 import com.cleveroad.audiovisualization.GLAudioVisualizationView;
-import com.dd.processbutton.iml.ActionProcessButton;
 
 import java.io.File;
 import java.util.Timer;
@@ -248,7 +247,12 @@ public class AudioRecorderActivity extends AppCompatActivity
 
 
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                null;
+        try {
+            apiService = ApiClient.getClient(getBaseContext()).create(ApiInterface.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String token = "Bearer " + StorageManager.getStringValue(getApplicationContext(), Const.TOKEN, "");
         File file = new File(AUDIO_FILE_PATH);
 
@@ -275,7 +279,12 @@ public class AudioRecorderActivity extends AppCompatActivity
                 int statusCode = response.code();
                 if (statusCode == 200) {
                     ApiInterface apiService =
-                            ApiClient.getClient().create(ApiInterface.class);
+                            null;
+                    try {
+                        apiService = ApiClient.getClient(getApplicationContext()).create(ApiInterface.class);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     String token = "Bearer " + StorageManager.getStringValue(getApplicationContext(), Const.TOKEN, "");
                     Call<AudioResponse> call1 = apiService.getContent(0 + "", token);
                     call1.enqueue(new Callback<AudioResponse>() {
