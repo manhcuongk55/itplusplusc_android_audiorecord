@@ -82,7 +82,7 @@
             <EditText android:id="@+id/input_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="Province" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -96,19 +96,21 @@
                 android:inputType="number"
                 android:hint="Old" />
         </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.CheckableImageButton
-            android:layout_width="match_parent"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_gender"
-                android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/male"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Gender" />
-        </android.support.design.widget.CheckableImageButton>
-
+                android:text="Male"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -121,20 +123,6 @@
                 android:inputType="textPassword"
                 android:hint="Password"/>
         </android.support.design.widget.TextInputLayout>
-
-        <!-- Password Re-enter Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_reEnterPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Re-enter Password"/>
-        </android.support.design.widget.TextInputLayout>
-
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"

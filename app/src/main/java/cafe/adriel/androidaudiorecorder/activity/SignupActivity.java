@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SignupActivity extends AppCompatActivity  {
+public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
     @BindView(R.id.input_name)
@@ -36,12 +37,15 @@ public class SignupActivity extends AppCompatActivity  {
     EditText _mobileText;
     @BindView(R.id.input_password)
     EditText _passwordText;
-    @BindView(R.id.input_reEnterPassword)
-    EditText _reEnterPasswordText;
     @BindView(R.id.btn_signup)
     Button _signupButton;
     @BindView(R.id.link_login)
     TextView _loginLink;
+    @BindView(R.id.input_province)
+    EditText input_province;
+    @BindView(R.id.input_old)
+    EditText input_old;
+    private int gender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,23 @@ public class SignupActivity extends AppCompatActivity  {
         });
     }
 
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.male:
+                if (checked)
+                    gender = 1;
+                break;
+            case R.id.female:
+                if (checked)
+                    gender = 0;
+                break;
+        }
+    }
+
     public void signup() {
         Log.d(TAG, "Signup");
 
@@ -89,8 +110,8 @@ public class SignupActivity extends AppCompatActivity  {
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
-
+        String province = input_province.getText().toString();
+        String old = input_old.getText().toString();
         // TODO: Implement your own signup logic here.
 
 
@@ -108,7 +129,9 @@ public class SignupActivity extends AppCompatActivity  {
         map.put("timeRecorder", "30");
         map.put("email", email);
         map.put("phone", mobile);
-
+        map.put("province", province);
+        map.put("gender", "" + gender);
+        map.put("old", old);
         Call<Respose> call2 = apiService2.register(map);
 
         call2.enqueue(new Callback<Respose>() {
@@ -171,7 +194,6 @@ public class SignupActivity extends AppCompatActivity  {
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
             _nameText.setError("at least 3 characters");
@@ -209,12 +231,12 @@ public class SignupActivity extends AppCompatActivity  {
             _passwordText.setError(null);
         }
 
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
+       /* if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
             _reEnterPasswordText.setError("Password Do not match");
             valid = false;
         } else {
             _reEnterPasswordText.setError(null);
-        }
+        }*/
 
         return valid;
     }
