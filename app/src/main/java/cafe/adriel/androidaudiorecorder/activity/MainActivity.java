@@ -108,11 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("email", "cuongdm29@gmail");
-        map.put("password","123456Aa@");
+        /*map.put("email", "cuongdm29@gmail");
+        map.put("password","123456Aa@");*/
 
-       /* map.put("email", email);
-        map.put("password",password);*/
+        map.put("email", email);
+        map.put("password",password);
 
         StorageManager.setStringValue(getApplicationContext(),Const.NAME_CONSUMER,"phamduybk@gmail.com");
         Call<User> call = apiService.getTokenAuthen(map);

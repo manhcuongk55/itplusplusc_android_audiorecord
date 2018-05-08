@@ -35,6 +35,8 @@ public class SignupActivity extends AppCompatActivity {
     EditText _emailText;
     @BindView(R.id.input_mobile)
     EditText _mobileText;
+    @BindView(R.id.input_time)
+    EditText _timeText;
     @BindView(R.id.input_password)
     EditText _passwordText;
     @BindView(R.id.btn_signup)
@@ -112,6 +114,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String province = input_province.getText().toString();
         String old = input_old.getText().toString();
+        String time = _timeText.getText().toString();
         // TODO: Implement your own signup logic here.
 
 
@@ -126,7 +129,7 @@ public class SignupActivity extends AppCompatActivity {
         map.put("userName", name);
         map.put("fullName", address);
         map.put("passWord", password);
-        map.put("timeRecorder", "30");
+        map.put("timeRecorder", time);
         map.put("email", email);
         map.put("phone", mobile);
         map.put("province", province);
